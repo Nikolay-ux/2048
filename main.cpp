@@ -49,37 +49,5 @@ int main()
     area[element / EDGE][element % EDGE] = values[rand() % VAL];
     system("clear");
     print(area);
-    while (ch) {
-        tcgetattr(STDIN_FILENO, &oldt);
-        newt = oldt;
-        newt.c_lflag &= ~(ICANON | ECHO);
-        tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-        ch = getchar();
-        tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-        switch (ch)
-        {
-        case 97:
-            // left();
-            //cout << "left" << endl;
-            break;
-        case 119:
-            // up();
-            //cout << "up" << endl;
-            break;
-        case 100:
-            // right();
-            //cout << "right" << endl;
-            break;
-        case 115:
-            // down();
-            //cout << "down" << endl;
-            break;
-        case 48:
-            return 0;
-            break;
-        default:
-            break;
-        }
-    }
     return 0;
 }
