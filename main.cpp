@@ -88,14 +88,18 @@ void left(int A[][edge])
                 flag = true;
             }
         }
-        for (int j = edge - 1; j > 0; j--)
-        {
-            if (A[i][j] != 0 && A[i][j - 1] == 0)
+        char k = 0;
+        while(k <= 1) {
+            for (int j = edge - 1; j > 0; j--)
             {
-                A[i][j - 1] = A[i][j];
-                A[i][j] = 0;
-                flag = true;
+                if (A[i][j] != 0 && A[i][j - 1] == 0)
+                {
+                    A[i][j - 1] = A[i][j];
+                    A[i][j] = 0;
+                    flag = true;
+                }
             }
+            k++;
         }
     }
     if (flag)
@@ -107,6 +111,16 @@ void up(int A[][edge])
     bool flag = false;
     for (int i = 0; i < edge; i++)
     {
+        for (int j = 0; j < edge; j++)
+        {
+            if (A[j][i] == A[j + 1][i] && A[j][i] != 0)
+            {
+                A[j][i] += A[j + 1][i];
+                A[j + 1][i] = 0;
+                j++;
+                flag = true;
+            }
+        }
         for (int j = edge - 1; j > 0; j--)
         {
             if (A[j][i] != 0 && A[j - 1][i] == 0)
@@ -126,14 +140,101 @@ void up(int A[][edge])
                 flag = true;
             }
         }
+        char k = 0;
+        while(k <= 1) {
+            for (int j = edge - 1; j > 0; j--)
+            {
+                if (A[j][i] != 0 && A[j - 1][i] == 0)
+                {
+                    A[j - 1][i] = A[j][i];
+                    A[j][i] = 0;
+                    flag = true;
+                }
+            }
+            k++;
+        }
+    }
+    if (flag)
+        add(A);
+}
+
+void right(int A[][edge]) {
+    bool flag = false;
+    for (int i = 0; i < edge; i++)
+    {
+        for (int j = 0; j < edge - 1; j++)
+        {
+            if (A[i][j] != 0 && A[i][j + 1] == 0)
+            {
+                A[i][j + 1] = A[i][j];
+                A[i][j] = 0;
+                flag = true;
+            }
+        }
         for (int j = edge - 1; j > 0; j--)
         {
-            if (A[j][i] != 0 && A[j - 1][i] == 0)
+            if (A[i][j] == A[i][j - 1] && A[i][j] != 0)
             {
-                A[j - 1][i] = A[j][i];
+                A[i][j] += A[i][j - 1];
+                A[i][j - 1] = 0;
+                j--;
+                flag = true;
+            }
+        }
+        char k = 0;
+        while(k <= 1) {
+            for (int j = 0; j < edge - 1; j++)
+            {
+                if (A[i][j] != 0 && A[i][j + 1] == 0)
+                {
+                    A[i][j + 1] = A[i][j];
+                    A[i][j] = 0;
+                    flag = true;
+                }
+            }
+            k++;
+        }
+    }
+    if (flag)
+        add(A);
+}
+
+void down(int A[][edge]) {
+    bool flag = false;
+    for (int i = 0; i < edge; i++)
+    {
+        for (int j = 0; j < edge - 1; j++)
+        {
+            if (A[j][i] != 0 && A[j + 1][i] == 0)
+            {
+                A[j + 1][i] = A[j][i];
                 A[j][i] = 0;
                 flag = true;
             }
+        }
+        for (int j = edge - 1; j > 0; j--)
+        {
+            if (A[j][i] == A[j - 1][i] && A[j][i] != 0)
+            {
+                A[j][i] += A[j - 1][i];
+                A[j - 1][i] = 0;
+                j--;
+                flag = true;
+            }
+        }
+        char k = 0;
+        while (k <= 1)
+        {
+            for (int j = 0; j < edge - 1; j++)
+            {
+                if (A[j][i] != 0 && A[j + 1][i] == 0)
+                {
+                    A[j + 1][i] = A[j][i];
+                    A[j][i] = 0;
+                    flag = true;
+                }
+            }
+            k++;
         }
     }
     if (flag)
@@ -167,21 +268,21 @@ int main()
             left(area);
             system("clear");
             print(area);
-            // cout << "left" << endl;
             break;
         case 119:
             up(area);
             system("clear");
             print(area);
-            // cout << "up" << endl;
             break;
         case 100:
-            // right();
-            // cout << "right" << endl;
+            right(area);
+            system("clear");
+            print(area);
             break;
         case 115:
-            // down();
-            // cout << "down" << endl;
+            down(area);
+            system("clear");
+            print(area);
             break;
         case 48:
             return 0;
