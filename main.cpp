@@ -69,16 +69,21 @@ void left(int A[][edge])
     bool flag = false;
     for (int i = 0; i < edge; i++)
     {
-        for (int j = edge - 1; j > 0; j--)
+        char k = 0;
+        while (k <= 2)
         {
-            if (A[i][j] != 0 && A[i][j - 1] == 0)
+            for (int j = edge - 1; j > 0; j--)
             {
-                A[i][j - 1] = A[i][j];
-                A[i][j] = 0;
-                flag = true;
+                if (A[i][j] != 0 && A[i][j - 1] == 0)
+                {
+                    A[i][j - 1] = A[i][j];
+                    A[i][j] = 0;
+                    flag = true;
+                }
             }
+            k++;
         }
-        for (int j = 0; j < edge; j++)
+        for (int j = 0; j < edge - 1; j++)
         {
             if (A[i][j] == A[i][j + 1] && A[i][j] != 0)
             {
@@ -88,7 +93,7 @@ void left(int A[][edge])
                 flag = true;
             }
         }
-        char k = 0;
+        k = 0;
         while(k <= 1) {
             for (int j = edge - 1; j > 0; j--)
             {
@@ -111,36 +116,31 @@ void up(int A[][edge])
     bool flag = false;
     for (int i = 0; i < edge; i++)
     {
-        for (int j = 0; j < edge; j++)
-        {
-            if (A[j][i] == A[j + 1][i] && A[j][i] != 0)
-            {
-                A[j][i] += A[j + 1][i];
-                A[j + 1][i] = 0;
-                j++;
-                flag = true;
-            }
-        }
-        for (int j = edge - 1; j > 0; j--)
-        {
-            if (A[j][i] != 0 && A[j - 1][i] == 0)
-            {
-                A[j - 1][i] = A[j][i];
-                A[j][i] = 0;
-                flag = true;
-            }
-        }
-        for (int j = 0; j < edge; j++)
-        {
-            if (A[j][i] == A[j + 1][i] && A[j][i] != 0)
-            {
-                A[j][i] += A[j + 1][i];
-                A[j + 1][i] = 0;
-                j++;
-                flag = true;
-            }
-        }
         char k = 0;
+        while (k <= 2)
+        {
+            for (int j = edge - 1; j > 0; j--)
+            {
+                if (A[j][i] != 0 && A[j - 1][i] == 0)
+                {
+                    A[j - 1][i] = A[j][i];
+                    A[j][i] = 0;
+                    flag = true;
+                }
+            }
+            k++;
+        }
+        for (int j = 0; j < edge; j++)
+        {
+            if (A[j][i] == A[j + 1][i] && A[j][i] != 0)
+            {
+                A[j][i] += A[j + 1][i];
+                A[j + 1][i] = 0;
+                j++;
+                flag = true;
+            }
+        }
+        k = 0;
         while(k <= 1) {
             for (int j = edge - 1; j > 0; j--)
             {
@@ -162,14 +162,19 @@ void right(int A[][edge]) {
     bool flag = false;
     for (int i = 0; i < edge; i++)
     {
-        for (int j = 0; j < edge - 1; j++)
+        char k = 0;
+        while (k <= 2)
         {
-            if (A[i][j] != 0 && A[i][j + 1] == 0)
+            for (int j = 0; j < edge - 1; j++)
             {
-                A[i][j + 1] = A[i][j];
-                A[i][j] = 0;
-                flag = true;
+                if (A[i][j] != 0 && A[i][j + 1] == 0)
+                {
+                    A[i][j + 1] = A[i][j];
+                    A[i][j] = 0;
+                    flag = true;
+                }
             }
+            k++;
         }
         for (int j = edge - 1; j > 0; j--)
         {
@@ -181,7 +186,7 @@ void right(int A[][edge]) {
                 flag = true;
             }
         }
-        char k = 0;
+        k = 0;
         while(k <= 1) {
             for (int j = 0; j < edge - 1; j++)
             {
@@ -203,14 +208,19 @@ void down(int A[][edge]) {
     bool flag = false;
     for (int i = 0; i < edge; i++)
     {
-        for (int j = 0; j < edge - 1; j++)
+        char k = 0;
+        while (k <= 2)
         {
-            if (A[j][i] != 0 && A[j + 1][i] == 0)
+            for (int j = 0; j < edge - 1; j++)
             {
-                A[j + 1][i] = A[j][i];
-                A[j][i] = 0;
-                flag = true;
+                if (A[j][i] != 0 && A[j + 1][i] == 0)
+                {
+                    A[j + 1][i] = A[j][i];
+                    A[j][i] = 0;
+                    flag = true;
+                }
             }
+            k++;
         }
         for (int j = edge - 1; j > 0; j--)
         {
@@ -222,7 +232,7 @@ void down(int A[][edge]) {
                 flag = true;
             }
         }
-        char k = 0;
+        k = 0;
         while (k <= 1)
         {
             for (int j = 0; j < edge - 1; j++)
