@@ -281,22 +281,22 @@ unsigned int down(int A[][edge])
 int main()
 {
     srand(time(NULL));
+
     int area[edge][edge];
     zero(area);
-    struct termios oldt, newt;
-    int ch = 1;
-    int element = rand() % (edge * edge);
-    const int val = 8;
-    int values[val] = {2, 2, 2, 2, 2, 2, 2, 4};
-    area[element / edge][element % edge] = values[rand() % val];
+    add(area);
 
     //Variable for score
     unsigned int score = 0;
 
-    system("clear");
-    print(area, score);
+    struct termios oldt, newt;
+    int ch = 1;
+
     while (ch)
     {
+        system("clear");
+        print(area, score);
+
         tcgetattr(STDIN_FILENO, &oldt);
         newt = oldt;
         newt.c_lflag &= ~(ICANON | ECHO);
@@ -323,8 +323,6 @@ int main()
         default:
             break;
         }
-        system("clear");
-        print(area, score);
     }
     return 0;
 }
