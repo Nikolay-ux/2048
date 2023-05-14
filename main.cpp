@@ -14,20 +14,20 @@ void print(int A[][edge])
     for (int i = 0; i < edge; i++)
     {
         if (i == 0)
-            cout << "___________________________" << endl;
+            cout << "____________________________" << endl;
         for (int j = 0; j < edge; j++)
         {
             if (A[i][j] != 0)
-                printf("%5d |", A[i][j]);
+                printf("|%5d ", A[i][j]);
             else
-                printf("      |");
+                printf("|      ");
         }
-        cout << endl;
+        cout << "|" << endl;
         if (i + 1 != edge)
-            cout << "------|------|------|------|" << endl;
+            cout << "|------|------|------|------|" << endl;
         else
         {
-            cout << "______|______|______|______|" << endl;
+            cout << "|______|______|______|______|" << endl;
         }
     }
 }
@@ -62,6 +62,7 @@ void add(int A[][edge])
     }
     int randInd = index[rand() % (itr - 1)];
     A[randInd / edge][randInd % edge] = values[rand() % val];
+    free(index);
 }
 
 void left(int A[][edge])
@@ -94,7 +95,8 @@ void left(int A[][edge])
             }
         }
         k = 0;
-        while(k <= 1) {
+        while (k <= 1)
+        {
             for (int j = edge - 1; j > 0; j--)
             {
                 if (A[i][j] != 0 && A[i][j - 1] == 0)
@@ -141,7 +143,8 @@ void up(int A[][edge])
             }
         }
         k = 0;
-        while(k <= 1) {
+        while (k <= 1)
+        {
             for (int j = edge - 1; j > 0; j--)
             {
                 if (A[j][i] != 0 && A[j - 1][i] == 0)
@@ -158,7 +161,8 @@ void up(int A[][edge])
         add(A);
 }
 
-void right(int A[][edge]) {
+void right(int A[][edge])
+{
     bool flag = false;
     for (int i = 0; i < edge; i++)
     {
@@ -187,7 +191,8 @@ void right(int A[][edge]) {
             }
         }
         k = 0;
-        while(k <= 1) {
+        while (k <= 1)
+        {
             for (int j = 0; j < edge - 1; j++)
             {
                 if (A[i][j] != 0 && A[i][j + 1] == 0)
@@ -204,7 +209,8 @@ void right(int A[][edge]) {
         add(A);
 }
 
-void down(int A[][edge]) {
+void down(int A[][edge])
+{
     bool flag = false;
     for (int i = 0; i < edge; i++)
     {
