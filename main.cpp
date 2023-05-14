@@ -9,8 +9,10 @@ const int val = 8;
 
 using namespace std;
 
-void print(int A[][edge])
+void print(int A[][edge], unsigned int score)
 {
+    cout << "Score: " << score <<  endl;
+    cout << "___________________________" << endl;
     for (int i = 0; i < edge; i++)
     {
         if (i == 0)
@@ -65,9 +67,10 @@ void add(int A[][edge])
     free(index);
 }
 
-void left(int A[][edge])
+unsigned int left(int A[][edge])
 {
     bool flag = false;
+    unsigned int score = 0;
     for (int i = 0; i < edge; i++)
     {
         char k = 0;
@@ -90,12 +93,15 @@ void left(int A[][edge])
             {
                 A[i][j] += A[i][j + 1];
                 A[i][j + 1] = 0;
+
+                score += A[i][j];
+
                 j++;
                 flag = true;
             }
         }
         k = 0;
-        while (k <= 1)
+        while(k <= 1) 
         {
             for (int j = edge - 1; j > 0; j--)
             {
@@ -111,11 +117,14 @@ void left(int A[][edge])
     }
     if (flag)
         add(A);
+
+    return score;
 }
 
-void up(int A[][edge])
+unsigned int up(int A[][edge])
 {
     bool flag = false;
+    unsigned int score = 0;
     for (int i = 0; i < edge; i++)
     {
         char k = 0;
@@ -138,6 +147,9 @@ void up(int A[][edge])
             {
                 A[j][i] += A[j + 1][i];
                 A[j + 1][i] = 0;
+
+                score += A[j][i];
+
                 j++;
                 flag = true;
             }
@@ -159,11 +171,14 @@ void up(int A[][edge])
     }
     if (flag)
         add(A);
+    
+    return score;
 }
 
-void right(int A[][edge])
+unsigned int right(int A[][edge]) 
 {
     bool flag = false;
+    unsigned int score = 0;
     for (int i = 0; i < edge; i++)
     {
         char k = 0;
@@ -186,6 +201,9 @@ void right(int A[][edge])
             {
                 A[i][j] += A[i][j - 1];
                 A[i][j - 1] = 0;
+
+                score += A[i][j];
+
                 j--;
                 flag = true;
             }
@@ -207,11 +225,14 @@ void right(int A[][edge])
     }
     if (flag)
         add(A);
+
+    return score;
 }
 
-void down(int A[][edge])
+unsigned int down(int A[][edge]) 
 {
     bool flag = false;
+    unsigned int score = 0;
     for (int i = 0; i < edge; i++)
     {
         char k = 0;
@@ -234,6 +255,9 @@ void down(int A[][edge])
             {
                 A[j][i] += A[j - 1][i];
                 A[j - 1][i] = 0;
+
+                score += A[j][i];
+
                 j--;
                 flag = true;
             }
@@ -255,23 +279,29 @@ void down(int A[][edge])
     }
     if (flag)
         add(A);
+
+    return score;
 }
 
 int main()
 {
     srand(time(NULL));
+
     int area[edge][edge];
     zero(area);
+    add(area);
+
+    //Variable for score
+    unsigned int score = 0;
+
     struct termios oldt, newt;
     int ch = 1;
-    int element = rand() % (edge * edge);
-    const int val = 8;
-    int values[val] = {2, 2, 2, 2, 2, 2, 2, 4};
-    area[element / edge][element % edge] = values[rand() % val];
-    system("clear");
-    print(area);
+
     while (ch)
     {
+        system("clear");
+        print(area, score);
+
         tcgetattr(STDIN_FILENO, &oldt);
         newt = oldt;
         newt.c_lflag &= ~(ICANON | ECHO);
@@ -281,24 +311,16 @@ int main()
         switch (ch)
         {
         case 97:
-            left(area);
-            system("clear");
-            print(area);
+            score += left(area);
             break;
         case 119:
-            up(area);
-            system("clear");
-            print(area);
+            score += up(area);
             break;
         case 100:
-            right(area);
-            system("clear");
-            print(area);
+            score += right(area);
             break;
         case 115:
-            down(area);
-            system("clear");
-            print(area);
+            score += down(area);
             break;
         case 48:
             return 0;
