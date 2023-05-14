@@ -12,11 +12,9 @@ using namespace std;
 void print(int A[][edge], unsigned int score)
 {
     cout << "Score: " << score <<  endl;
-    cout << "___________________________" << endl;
+    cout << "____________________________" << endl;
     for (int i = 0; i < edge; i++)
     {
-        if (i == 0)
-            cout << "____________________________" << endl;
         for (int j = 0; j < edge; j++)
         {
             if (A[i][j] != 0)
