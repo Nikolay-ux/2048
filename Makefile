@@ -1,6 +1,6 @@
 all:./main.cpp
-	g++ -c ./main.cpp
-	g++ main.o -o app
+	g++ -c ./main.cpp ./game.cpp
+	g++ main.o game.o -o app
 
 run:
 	./app
