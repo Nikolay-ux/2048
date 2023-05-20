@@ -16,14 +16,21 @@ int main()
     game game;
     game.add();
 
-    sf::RenderWindow window(sf::VideoMode(400, 500), "2048", sf::Style::Close | sf::Style::Titlebar);
+    sf::RenderWindow window(sf::VideoMode(700, 600), "2048", sf::Style::Close | sf::Style::Titlebar);
     window.setPosition(sf::Vector2i(760, 290));
 
-    sf::Vector2u windowSize(400, 500);
+    sf::Vector2u windowSize(700, 600);
     window.setSize(windowSize);
 
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Magenta);
+    sf::Texture texture;
+    if (!texture.loadFromFile("textures/2.png"))
+    {
+        cout << "ERROR opening" << endl;
+    }
+
+    sf::Sprite sprite;
+    sprite.setTexture(texture);
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -34,7 +41,7 @@ int main()
             else if (event.type == sf::Event::Resized)
                 window.setSize(windowSize);
             window.clear(sf::Color(200, 200, 200));
-            window.draw(shape);
+            window.draw(sprite);
             window.display();
         }
     }
