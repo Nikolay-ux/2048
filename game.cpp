@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 #include "game.h"
 
@@ -7,10 +8,12 @@ using namespace std;
 game::game()
 {
     score = 0;
+    best_score = openScore();
 }
 void game::print()
 {
-    cout << "Score: " << score << endl;
+    system("clear");
+    cout << "Score: " << score << " | Best score: " << best_score<< endl;
     cout << "____________________________" << endl;
     for (int i = 0; i < edge; i++)
     {
@@ -255,4 +258,63 @@ void game::down()
     }
     if (flag)
         add();
+}
+
+bool game::checkEnd()
+{
+    for (int i = 0; i < edge; i++) 
+    {
+
+        for (int j = 0; j < edge; j++)
+        {
+            if (area[i][j] == 0) 
+            {
+                return false;
+            }
+        }
+
+        for (int j = 0; j < edge - 1; j++)
+        {
+            if (area[i][j] == area[i][j + 1])
+            {
+                return false;
+            }
+            if (area[j][i] == area[j + 1][i]) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+unsigned int game::openScore()
+{
+    ifstream file("save_score.dat", fstream::binary);
+    
+    if (!file.is_open()) 
+    {
+        return 0;
+    } 
+    else 
+    {
+        string buf;
+
+        file >> buf;
+        file.close();
+
+        return std::stoi(buf);
+    }
+}
+
+void game::saveScore()
+{
+    if (score > best_score)
+    {
+    ofstream file("save_score.dat", fstream::binary);
+
+    file << score << endl;
+
+    file.close();
+    }
 }

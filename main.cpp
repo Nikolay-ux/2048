@@ -16,11 +16,10 @@ int main()
 
     struct termios oldt, newt;
     int ch = 1;
-
-    while (ch)
+    
+    game.print();
+    while (!game.checkEnd())
     {
-        system("clear");
-        game.print();
 
         tcgetattr(STDIN_FILENO, &oldt);
         newt = oldt;
@@ -48,6 +47,11 @@ int main()
         default:
             break;
         }
+
+        game.print();
     }
+
+    game.saveScore();
+
     return 0;
 }
