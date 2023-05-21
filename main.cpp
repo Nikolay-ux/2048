@@ -66,8 +66,8 @@ int main()
             {
                 window.draw(sprites[i]);
             }
-            string variableString = "Score: " + to_string(game.score);
-            text.setString(variableString);
+            string str = "Score: " + to_string(game.score);
+            text.setString(str);
             window.draw(text);
             window.display();
         }
