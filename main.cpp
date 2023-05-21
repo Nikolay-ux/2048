@@ -16,67 +16,61 @@ int main()
     game game;
     game.add();
 
-    sf::RenderWindow window(sf::VideoMode(700, 600), "2048", sf::Style::Close | sf::Style::Titlebar);
+    sf::Sprite *sprites;
+
+    sf::Font font;
+    font.loadFromFile("fonts/EightBits.ttf");
+    sf::Text text;
+    text.setFont(font);
+    text.setCharacterSize(40);
+    text.setFillColor(sf::Color::Red);
+
+    sf::RenderWindow window(sf::VideoMode(400, 500), "2048", sf::Style::Close | sf::Style::Titlebar);
     window.setPosition(sf::Vector2i(760, 290));
-
-    sf::Vector2u windowSize(700, 600);
+    sf::Vector2u windowSize(400, 500);
     window.setSize(windowSize);
-
-    sf::Texture texture;
-    if (!texture.loadFromFile("textures/2.png"))
-    {
-        cout << "ERROR opening" << endl;
-    }
-
-    sf::Sprite sprite;
-    sprite.setTexture(texture);
-
+    
     while (window.isOpen())
     {
+        window.setKeyRepeatEnabled(false);
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed) {
                 window.close();
-            else if (event.type == sf::Event::Resized)
+            }
+            else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
+                window.close();
+            else if (event.type == sf::Event::Resized) {
                 window.setSize(windowSize);
+            }
+            else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::D))
+            {
+                game.right();
+            }
+            else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::A))
+            {
+                game.left();
+            }
+            else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::S))
+            {
+                game.down();
+            }
+            else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::W))
+            {
+                game.up();
+            }
             window.clear(sf::Color(200, 200, 200));
-            window.draw(sprite);
+            sprites = game.print();
+            for (int i = 0; i < 16; i++)
+            {
+                window.draw(sprites[i]);
+            }
+            string variableString = "Score: " + to_string(game.score);
+            text.setString(variableString);
+            window.draw(text);
             window.display();
         }
     }
-    // struct termios oldt, newt;
-    // int ch = 1;
-    // while (ch)
-    // {
-    //     system("clear");
-    //     game.print();
-    //     tcgetattr(STDIN_FILENO, &oldt);
-    //     newt = oldt;
-    //     newt.c_lflag &= ~(ICANON | ECHO);
-    //     tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    //     ch = getchar();
-    //     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-    //     switch (ch)
-    //     {
-    //     case 97:
-    //         game.left();
-    //         break;
-    //     case 119:
-    //         game.up();
-    //         break;
-    //     case 100:
-    //         game.right();
-    //         break;
-    //     case 115:
-    //         game.down();
-    //         break;
-    //     case 48:
-    //         return 0;
-    //         break;
-    //     default:
-    //         break;
-    //     }
-    // }
     return 0;
 }
