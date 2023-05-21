@@ -1,4 +1,5 @@
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 #include "game.h"
 
@@ -8,28 +9,93 @@ game::game()
 {
     score = 0;
 }
-void game::print()
+sf::Sprite *game::print()
 {
-    cout << "Score: " << score << endl;
-    cout << "____________________________" << endl;
+    sf::Texture *textures = new sf::Texture[14];
+    textures[0].loadFromFile("textures/2.png");
+    textures[1].loadFromFile("textures/4.png");
+    textures[2].loadFromFile("textures/8.png");
+    textures[3].loadFromFile("textures/16.png");
+    textures[4].loadFromFile("textures/32.png");
+    textures[5].loadFromFile("textures/64.png");
+    textures[6].loadFromFile("textures/128.png");
+    textures[7].loadFromFile("textures/256.png");
+    textures[8].loadFromFile("textures/512.png");
+    textures[9].loadFromFile("textures/1024.png");
+    textures[10].loadFromFile("textures/2048.png");
+    textures[11].loadFromFile("textures/4096.png");
+    textures[12].loadFromFile("textures/8192.png");
+    textures[13].loadFromFile("textures/16384.png");
+
+    sf::Sprite *sprites = new sf::Sprite[16];
+
     for (int i = 0; i < edge; i++)
     {
-        for (int j = 0; j < edge; j++)
+        for (int j = edge - 1; j >= 0; j--)
         {
-            if (area[i][j] != 0)
-                printf("|%5d ", area[i][j]);
-            else
-                printf("|      ");
-        }
-        cout << "|" << endl;
-        if (i + 1 != edge)
-            cout << "|------|------|------|------|" << endl;
-        else
-        {
-            cout << "|______|______|______|______|" << endl;
+            if (area[i][j] == 2)
+            {
+                sprites[i * 4 + j].setTexture(textures[0]);
+                
+            }
+            else if (area[i][j] == 4)
+            {
+                sprites[i * 4 + j].setTexture(textures[1]);
+            }
+            else if (area[i][j] == 8)
+            {
+                sprites[i * 4 + j].setTexture(textures[2]);
+            }
+            else if (area[i][j] == 16)
+            {
+                sprites[i * 4 + j].setTexture(textures[3]);
+            }
+            else if (area[i][j] == 32)
+            {
+                sprites[i * 4 + j].setTexture(textures[4]);
+            }
+            else if (area[i][j] == 64)
+            {
+                sprites[i * 4 + j].setTexture(textures[5]);
+            }
+            else if (area[i][j] == 128)
+            {
+                sprites[i * 4 + j].setTexture(textures[6]);
+            }
+            else if (area[i][j] == 256)
+            {
+                sprites[i * 4 + j].setTexture(textures[7]);
+            }
+            else if (area[i][j] == 512)
+            {
+                sprites[i * 4 + j].setTexture(textures[8]);
+            }
+            else if (area[i][j] == 1024)
+            {
+                sprites[i * 4 + j].setTexture(textures[9]);
+            }
+            else if (area[i][j] == 2048)
+            {
+                sprites[i * 4 + j].setTexture(textures[10]);
+            }
+            else if (area[i][j] == 4096)
+            {
+                sprites[i * 4 + j].setTexture(textures[11]);
+            }
+            else if (area[i][j] == 8192)
+            {
+                sprites[i * 4 + j].setTexture(textures[12]);
+            }
+            else if (area[i][j] == 16384)
+            {
+                sprites[i * 4 + j].setTexture(textures[13]);
+            }
+            sprites[i * 4 + j].setPosition(sf::Vector2f((j) * (100.f), (i + 1) * (100.f)));
         }
     }
+    return sprites;
 }
+
 void game::add()
 {
     const int val = 8;
