@@ -5,11 +5,11 @@ class game
 private:
     static const int edge = 4;
     int (*area)[edge] = new int[edge][edge];
-    unsigned int score;
 
 public:
+    unsigned int score;
     game();
-    void print();
+    sf::Sprite *print();
     void add();
     void left();
     void up();
