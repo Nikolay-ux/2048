@@ -22,9 +22,9 @@ int main()
     font.loadFromFile("fonts/EightBits.ttf");
     sf::Text text;
     text.setFont(font);
-    text.setCharacterSize(40);
-    text.setFillColor(sf::Color::Red);
-
+    text.setCharacterSize(45);
+    text.setFillColor(sf::Color::Black);
+    text.setStyle(sf::Text::Bold);
     sf::RenderWindow window(sf::VideoMode(400, 500), "2048", sf::Style::Close | sf::Style::Titlebar);
     window.setPosition(sf::Vector2i(760, 290));
     sf::Vector2u windowSize(400, 500);
