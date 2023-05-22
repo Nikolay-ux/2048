@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstdlib>
-#include <termios.h>
 #include <unistd.h>
 #include <string.h>
 
@@ -33,12 +32,8 @@ int main()
     sf::Vector2u windowSize(size, size + 100);
     window.setSize(windowSize);
     
-    while (window.isOpen())
-    struct termios oldt, newt;
-    int ch = 1;
-    
     game.print();
-    while (!game.checkEnd())
+    while(window.isOpen()) 
     {
         window.setKeyRepeatEnabled(false);
         sf::Event event;
@@ -73,10 +68,15 @@ int main()
             {
                 window.draw(sprites[i]);
             }
-            //cout << "Score: " << score << " | Best score: " << best_score << endl;
             string str = "Score: " + to_string(game.score) + " | Best score: " + to_string(game.best_score);
             text.setString(str);
             window.draw(text);
+            if (game.checkEnd())
+            {
+                text.setCharacterSize(60);
+                text.setPosition(sf::VideoMode::getDesktopMode().height / 4, sf::VideoMode::getDesktopMode().height / 4);
+                string str = "GAME OVER!";
+            }
             window.display();
         }
     }
