@@ -34,11 +34,15 @@ int main()
     window.setSize(windowSize);
     
     while (window.isOpen())
+    struct termios oldt, newt;
+    int ch = 1;
+    
+    game.print();
+    while (!game.checkEnd())
     {
         window.setKeyRepeatEnabled(false);
         sf::Event event;
-        while (window.pollEvent(event))
-        {
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
@@ -69,11 +73,15 @@ int main()
             {
                 window.draw(sprites[i]);
             }
-            string str = "Score: " + to_string(game.score);
+            //cout << "Score: " << score << " | Best score: " << best_score << endl;
+            string str = "Score: " + to_string(game.score) + " | Best score: " + to_string(game.best_score);
             text.setString(str);
             window.draw(text);
             window.display();
         }
     }
+
+    game.saveScore();
+
     return 0;
 }

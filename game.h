@@ -8,6 +8,7 @@ private:
 
 public:
     unsigned int score;
+    unsigned int best_score;
     game();
     sf::Sprite *print();
     void add();
@@ -15,4 +16,7 @@ public:
     void up();
     void right();
     void down();
+    bool checkEnd();
+    unsigned int openScore();
+    void saveScore();
 };
