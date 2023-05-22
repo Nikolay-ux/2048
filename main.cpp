@@ -27,7 +27,10 @@ int main()
     text.setStyle(sf::Text::Bold);
     sf::RenderWindow window(sf::VideoMode(400, 500), "2048", sf::Style::Close | sf::Style::Titlebar);
     window.setPosition(sf::Vector2i(760, 290));
-    sf::Vector2u windowSize(400, 500);
+
+    float size = sf::VideoMode::getDesktopMode().height / 2;
+
+    sf::Vector2u windowSize(size, size + 100);
     window.setSize(windowSize);
     
     while (window.isOpen())
