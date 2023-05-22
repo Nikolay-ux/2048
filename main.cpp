@@ -73,9 +73,12 @@ int main()
             window.draw(text);
             if (game.checkEnd())
             {
+                window.clear(sf::Color(200, 200, 200));
                 text.setCharacterSize(60);
-                text.setPosition(sf::VideoMode::getDesktopMode().height / 4, sf::VideoMode::getDesktopMode().height / 4);
+                text.setPosition(size/2-150, (size-100)/2);
                 string str = "GAME OVER!";
+                text.setString(str);
+                window.draw(text);
             }
             window.display();
         }
