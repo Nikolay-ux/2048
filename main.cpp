@@ -20,10 +20,15 @@ int main()
     sf::Font font;
     font.loadFromFile("fonts/EightBits.ttf");
     sf::Text text;
+    sf::Text text1;
     text.setFont(font);
     text.setCharacterSize(45);
     text.setFillColor(sf::Color::Black);
     text.setStyle(sf::Text::Bold);
+    text1.setFont(font);
+    text1.setCharacterSize(45);
+    text1.setFillColor(sf::Color::Black);
+    text1.setStyle(sf::Text::Bold);
     sf::RenderWindow window(sf::VideoMode(400, 500), "2048", sf::Style::Close | sf::Style::Titlebar);
     window.setPosition(sf::Vector2i(760, 290));
 
@@ -68,9 +73,13 @@ int main()
             {
                 window.draw(sprites[i]);
             }
-            string str = "Score: " + to_string(game.score) + " | Best score: " + to_string(game.best_score);
+            string str = "Score: " + to_string(game.score);
+            string str1 = "Best score: " + to_string(game.best_score);
             text.setString(str);
+            text1.setString(str1);
+            text1.setPosition(0, 50);
             window.draw(text);
+            window.draw(text1);
             if (game.checkEnd())
             {
                 window.clear(sf::Color(200, 200, 200));
