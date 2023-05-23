@@ -38,12 +38,16 @@ int main()
         window.setKeyRepeatEnabled(false);
         sf::Event event;
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
+            if (event.type == sf::Event::Closed) 
+            {
                 window.close();
             }
             else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
+            {
                 window.close();
-            else if (event.type == sf::Event::Resized) {
+            }
+            else if (event.type == sf::Event::Resized) 
+            {
                 window.setSize(windowSize);
             }
             else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::D))
