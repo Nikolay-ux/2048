@@ -62,6 +62,10 @@ int main()
             {
                 game.up();
             }
+            else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::R))
+            {
+                game.restart();
+            }
             window.clear(sf::Color(200, 200, 200));
             sprites = game.print();
             for (int i = 0; i < 16; i++)
