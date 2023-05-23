@@ -79,10 +79,21 @@ int main()
             {
                 window.clear(sf::Color(200, 200, 200));
                 text.setCharacterSize(60);
-                text.setPosition(size/2-150, (size-100)/2);
+                text.setPosition(size/2-160, (size-100)/2);
                 string str = "GAME OVER!";
                 text.setString(str);
+
+                sf::Text text_rest;
+                text_rest.setFont(font);
+                text_rest.setCharacterSize(45);
+                text_rest.setFillColor(sf::Color::Black);
+                text_rest.setStyle(sf::Text::Bold);
+                text_rest.setCharacterSize(40);
+                text_rest.setPosition(size /2 - 170, (size-100) / 2 + 100);
+                str = "Restart (press r)";
+                text_rest.setString(str);
                 window.draw(text);
+                window.draw(text_rest);
             }
             window.display();
         }
