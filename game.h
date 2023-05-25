@@ -5,10 +5,10 @@ class game
 private:
     static const int edge = 4;
     int (*area)[edge] = new int[edge][edge];
-
-public:
     unsigned int score;
     unsigned int best_score;
+
+public:
     game();
     sf::Sprite *print();
     void add();
@@ -20,4 +20,8 @@ public:
     unsigned int openScore();
     void saveScore();
     void restart();
+
+    unsigned int getScore();
+    unsigned int getBestScore();
+    
 };
