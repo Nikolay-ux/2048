@@ -33,11 +33,11 @@ int main()
     window.setPosition(sf::Vector2i(760, 290));
 
     float size = sf::VideoMode::getDesktopMode().height / 2;
-
     sf::Vector2u windowSize(size, size + 100);
     window.setSize(windowSize);
     
     game.print();
+    bool flag = true;
     while(window.isOpen()) 
     {
         window.setKeyRepeatEnabled(false);
@@ -55,61 +55,84 @@ int main()
             {
                 window.setSize(windowSize);
             }
-            else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::D))
+            else if (event.type == sf::Event::MouseButtonPressed && flag && event.mouseButton.button == sf::Mouse::Left)
             {
-                game.right();
+                sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+                if ((localPosition.x >= size / 2 - 80 && localPosition.x <= size / 2 + 77.5) && (localPosition.y >= (size + 100) / 2 - 45 && localPosition.y <= (size + 100) / 2 + 35))
+                {
+                    flag = false;
+                }
             }
-            else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::A))
-            {
-                game.left();
-            }
-            else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::S))
-            {
-                game.down();
-            }
-            else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::W))
-            {
-                game.up();
-            }
-            else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::R))
-            {
-                game.saveScore();
-                game.restart();
-                game.best_score = game.openScore();
-            }
-            window.clear(sf::Color(200, 200, 200));
-            sprites = game.print();
-            for (int i = 0; i < 16; i++)
-            {
-                window.draw(sprites[i]);
-            }
-            string str = "Score: " + to_string(game.score);
-            string str1 = "Best score: " + to_string(game.best_score);
-            text.setPosition(0, 0);
-            text1.setPosition(0, 50);
-            text.setCharacterSize(45);
-            text.setString(str);
-            text1.setString(str1);
-            window.draw(text);
-            window.draw(text1);
-            if (game.checkEnd())
-            {
+            else if(!flag) {
+                if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::D))
+                {
+                    game.right();
+                }
+                else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::A))
+                {
+                    game.left();
+                }
+                else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::S))
+                {
+                    game.down();
+                }
+                else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::W))
+                {
+                    game.up();
+                }
+                else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::R))
+                {
+                    game.saveScore();
+                    game.restart();
+                    game.best_score = game.openScore();
+                }
                 window.clear(sf::Color(200, 200, 200));
-                text.setCharacterSize(60);
-                text.setPosition(size/2-160, (size-100)/2);
-                string str = "GAME OVER!";
+            }
+            if (flag) {
+                window.clear(sf::Color(200, 200, 200));
+                sf::RectangleShape rectangle(sf::Vector2f(117.5, 60));
+                rectangle.setPosition(size / 2 - 130, (size + 100) / 2 - 105);
+                window.draw(rectangle);
+                string str = "START";
+                text.setPosition(size / 2 - 110, (size + 100) / 2 - 110);
+                text.setCharacterSize(45);
                 text.setString(str);
-                sf::Text text_rest;
-                text_rest.setFont(font);
-                text_rest.setCharacterSize(45);
-                text_rest.setFillColor(sf::Color::Black);
-                text_rest.setStyle(sf::Text::Bold);
-                text_rest.setCharacterSize(40);
-                text_rest.setPosition(size /2 - 170, (size-100) / 2 + 100);
-                str = "Restart (press r)";
-                text_rest.setString(str);
                 window.draw(text);
-                window.draw(text_rest);
+            }
+            else {
+                sprites = game.print();
+                for (int i = 0; i < 16; i++)
+                {
+                    window.draw(sprites[i]);
+                }
+                string str = "Score: " + to_string(game.score);
+                string str1 = "Best score: " + to_string(game.best_score);
+                text.setPosition(0, 0);
+                text1.setPosition(0, 50);
+                text.setCharacterSize(45);
+                text.setString(str);
+                text1.setString(str1);
+                window.draw(text);
+                window.draw(text1);
+                if (game.checkEnd())
+                {
+                    window.clear(sf::Color(200, 200, 200));
+                    text.setCharacterSize(60);
+                    text.setPosition(size/2-160, (size-100)/2);
+                    string str = "GAME OVER!";
+                    text.setString(str);
+                    sf::Text text_rest;
+                    text_rest.setFont(font);
+                    text_rest.setCharacterSize(45);
+                    text_rest.setFillColor(sf::Color::Black);
+                    text_rest.setStyle(sf::Text::Bold);
+                    text_rest.setCharacterSize(40);
+                    text_rest.setPosition(size /2 - 170, (size-100) / 2 + 100);
+                    str = "Restart (press r)";
+                    text_rest.setString(str);
+                    window.draw(text);
+                    window.draw(text_rest);
+                }
             }
             window.display();
         }
