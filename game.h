@@ -5,6 +5,7 @@ class game
 private:
     static const int edge = 4;
     int (*area)[edge] = new int[edge][edge];
+    sf::Texture *textures = new sf::Texture[14];
 
 public:
     unsigned int score;
