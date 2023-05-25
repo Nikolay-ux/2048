@@ -76,6 +76,8 @@ int main()
             {
                 window.draw(sprites[i]);
             }
+            text.setPosition(0, 0);
+            text.setCharacterSize(45);
             string str = "Score: " + to_string(game.score) + " | Best score: " + to_string(game.best_score);
             text.setString(str);
             window.draw(text);
