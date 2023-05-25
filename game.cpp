@@ -11,10 +11,6 @@ game::game()
 {
     score = 0;
     best_score = openScore();
-}
-sf::Sprite *game::print()
-{
-    sf::Texture *textures = new sf::Texture[14];
     textures[0].loadFromFile("textures/2.png");
     textures[1].loadFromFile("textures/4.png");
     textures[2].loadFromFile("textures/8.png");
@@ -29,70 +25,42 @@ sf::Sprite *game::print()
     textures[11].loadFromFile("textures/4096.png");
     textures[12].loadFromFile("textures/8192.png");
     textures[13].loadFromFile("textures/16384.png");
-
+}
+sf::Sprite *game::print()
+{
     sf::Sprite *sprites = new sf::Sprite[16];
-    
     for (int i = 0; i < edge; i++)
     {
         for (int j = edge - 1; j >= 0; j--)
         {
             if (area[i][j] == 2)
-            {
                 sprites[i * 4 + j].setTexture(textures[0]);
-                
-            }
             else if (area[i][j] == 4)
-            {
                 sprites[i * 4 + j].setTexture(textures[1]);
-            }
             else if (area[i][j] == 8)
-            {
                 sprites[i * 4 + j].setTexture(textures[2]);
-            }
             else if (area[i][j] == 16)
-            {
                 sprites[i * 4 + j].setTexture(textures[3]);
-            }
             else if (area[i][j] == 32)
-            {
                 sprites[i * 4 + j].setTexture(textures[4]);
-            }
             else if (area[i][j] == 64)
-            {
                 sprites[i * 4 + j].setTexture(textures[5]);
-            }
             else if (area[i][j] == 128)
-            {
                 sprites[i * 4 + j].setTexture(textures[6]);
-            }
             else if (area[i][j] == 256)
-            {
                 sprites[i * 4 + j].setTexture(textures[7]);
-            }
             else if (area[i][j] == 512)
-            {
                 sprites[i * 4 + j].setTexture(textures[8]);
-            }
             else if (area[i][j] == 1024)
-            {
                 sprites[i * 4 + j].setTexture(textures[9]);
-            }
             else if (area[i][j] == 2048)
-            {
                 sprites[i * 4 + j].setTexture(textures[10]);
-            }
             else if (area[i][j] == 4096)
-            {
                 sprites[i * 4 + j].setTexture(textures[11]);
-            }
             else if (area[i][j] == 8192)
-            {
                 sprites[i * 4 + j].setTexture(textures[12]);
-            }
             else if (area[i][j] == 16384)
-            {
                 sprites[i * 4 + j].setTexture(textures[13]);
-            }
             sprites[i * 4 + j].setPosition(sf::Vector2f((j) * (100.f), (i + 1) * (100.f)));
         }
     }
