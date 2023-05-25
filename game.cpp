@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <fstream>
+#include <cstring>
 
 #include "game.h"
 
@@ -344,7 +345,8 @@ bool game::checkEnd()
             {
                 return false;
             }
-            if (area[j][i] == area[j + 1][i]) {
+            if (area[j][i] == area[j + 1][i]) 
+            {
                 return false;
             }
         }
@@ -376,10 +378,17 @@ void game::saveScore()
 {
     if (score > best_score)
     {
-    ofstream file("save_score.dat", fstream::binary);
+        ofstream file("save_score.dat", fstream::binary);
 
-    file << score << endl;
+        file << score << endl;
 
-    file.close();
+        file.close();
     }
+}
+
+void game::restart()
+{
+    memset(area, 0, sizeof(area[0][0]) * edge * edge);
+    add();
+    score = 0;
 }

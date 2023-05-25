@@ -43,12 +43,16 @@ int main()
         window.setKeyRepeatEnabled(false);
         sf::Event event;
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
+            if (event.type == sf::Event::Closed) 
+            {
                 window.close();
             }
             else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
+            {
                 window.close();
-            else if (event.type == sf::Event::Resized) {
+            }
+            else if (event.type == sf::Event::Resized) 
+            {
                 window.setSize(windowSize);
             }
             else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::D))
@@ -67,6 +71,10 @@ int main()
             {
                 game.up();
             }
+            else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::R))
+            {
+                game.restart();
+            }
             window.clear(sf::Color(200, 200, 200));
             sprites = game.print();
             for (int i = 0; i < 16; i++)
@@ -75,19 +83,32 @@ int main()
             }
             string str = "Score: " + to_string(game.score);
             string str1 = "Best score: " + to_string(game.best_score);
+            text.setPosition(0, 0);
+            text1.setPosition(0, 50);
+            text.setCharacterSize(45);
             text.setString(str);
             text1.setString(str1);
-            text1.setPosition(0, 50);
             window.draw(text);
             window.draw(text1);
             if (game.checkEnd())
             {
                 window.clear(sf::Color(200, 200, 200));
                 text.setCharacterSize(60);
-                text.setPosition(size/2-150, (size-100)/2);
+                text.setPosition(size/2-160, (size-100)/2);
                 string str = "GAME OVER!";
                 text.setString(str);
+
+                sf::Text text_rest;
+                text_rest.setFont(font);
+                text_rest.setCharacterSize(45);
+                text_rest.setFillColor(sf::Color::Black);
+                text_rest.setStyle(sf::Text::Bold);
+                text_rest.setCharacterSize(40);
+                text_rest.setPosition(size /2 - 170, (size-100) / 2 + 100);
+                str = "Restart (press r)";
+                text_rest.setString(str);
                 window.draw(text);
+                window.draw(text_rest);
             }
             window.display();
         }

@@ -19,4 +19,5 @@ public:
     bool checkEnd();
     unsigned int openScore();
     void saveScore();
+    void restart();
 };
