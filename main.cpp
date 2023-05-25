@@ -75,6 +75,7 @@ int main()
             {
                 game.saveScore();
                 game.restart();
+                game.best_score = game.openScore();
             }
             window.clear(sf::Color(200, 200, 200));
             sprites = game.print();
