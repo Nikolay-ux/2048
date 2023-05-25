@@ -73,6 +73,7 @@ int main()
             }
             else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::R))
             {
+                game.saveScore();
                 game.restart();
             }
             window.clear(sf::Color(200, 200, 200));
@@ -97,7 +98,6 @@ int main()
                 text.setPosition(size/2-160, (size-100)/2);
                 string str = "GAME OVER!";
                 text.setString(str);
-
                 sf::Text text_rest;
                 text_rest.setFont(font);
                 text_rest.setCharacterSize(45);
