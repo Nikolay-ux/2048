@@ -359,4 +359,15 @@ void game::restart()
     memset(area, 0, sizeof(area[0][0]) * edge * edge);
     add();
     score = 0;
+    best_score = openScore();
+}
+
+unsigned int game::getScore()
+{
+    return score;
+}
+
+unsigned int game::getBestScore()
+{
+    return best_score;
 }
