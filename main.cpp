@@ -140,9 +140,9 @@ int main()
             }
             else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
             {
-                game.saveScore();
                 if (menu(window, windowSize, size, font) != 0)
                 {
+                    game.saveScore();
                     return 0;
                 }
             }
