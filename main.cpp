@@ -67,6 +67,9 @@ int main()
 {
     srand(time(NULL));
 
+    game game;
+    game.add();
+
     sf::Sprite *sprites;
 
     sf::Font font;
@@ -97,9 +100,6 @@ int main()
     text1.setFillColor(sf::Color::Black);
     text1.setStyle(sf::Text::Bold);
 
-    game game;
-    game.add();
-    game.print();
     while(window.isOpen()) 
     {
         window.setKeyRepeatEnabled(false);
@@ -148,6 +148,8 @@ int main()
             }
             string str = "Score: " + to_string(game.getScore());
             string str1 = "Best score: " + to_string(game.getBestScore());
+            text.setCharacterSize(45);
+            text.setPosition(0, 0);
             text.setString(str);
             text1.setString(str1);
             window.draw(text);
