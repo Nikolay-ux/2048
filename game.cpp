@@ -61,7 +61,7 @@ sf::Sprite *game::print()
                 sprites[i * 4 + j].setTexture(textures[12]);
             else if (area[i][j] == 16384)
                 sprites[i * 4 + j].setTexture(textures[13]);
-            sprites[i * 4 + j].setPosition(sf::Vector2f((j) * (100.f), (i + 1) * (100.f)));
+            sprites[i * 4 + j].setPosition(sf::Vector2f((j) * (100.f) + 5, (i + 1) * (100.f) + 5));
         }
     }
     return sprites;
@@ -359,4 +359,15 @@ void game::restart()
     memset(area, 0, sizeof(area[0][0]) * edge * edge);
     add();
     score = 0;
+    best_score = openScore();
+}
+
+unsigned int game::getScore()
+{
+    return score;
+}
+
+unsigned int game::getBestScore()
+{
+    return best_score;
 }
