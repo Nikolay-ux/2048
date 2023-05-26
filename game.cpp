@@ -61,7 +61,7 @@ sf::Sprite *game::print()
                 sprites[i * 4 + j].setTexture(textures[12]);
             else if (area[i][j] == 16384)
                 sprites[i * 4 + j].setTexture(textures[13]);
-            sprites[i * 4 + j].setPosition(sf::Vector2f((j) * (100.f), (i + 1) * (100.f)));
+            sprites[i * 4 + j].setPosition(sf::Vector2f((j) * (100.f) + 5, (i + 1) * (100.f) + 5));
         }
     }
     return sprites;
