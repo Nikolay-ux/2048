@@ -140,6 +140,7 @@ int main()
             }
             else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
             {
+                game.saveScore();
                 if (menu(window, windowSize, size, font) != 0)
                 {
                     return 0;
@@ -190,7 +191,7 @@ int main()
             {
                 window.clear(sf::Color(255, 204, 102));
                 text.setCharacterSize(60);
-                text.setPosition(size/2-160, (size-100)/2);
+                text.setPosition(size * 0.2037, size * 0.3248);
                 string str = "GAME OVER!";
                 text.setString(str);
                 sf::Text text_rest;
@@ -199,7 +200,7 @@ int main()
                 text_rest.setFillColor(sf::Color::Black);
                 text_rest.setStyle(sf::Text::Bold);
                 text_rest.setCharacterSize(40);
-                text_rest.setPosition(size /2 - 170, (size-100) / 2 + 100);
+                text_rest.setPosition(size*0.1851, size * 0.5925);
                 str = "Restart (press r)";
                 text_rest.setString(str);
                 window.draw(text);
